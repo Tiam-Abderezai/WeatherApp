@@ -1,4 +1,7 @@
 package com.example.weatherapp.view
 
-class DetailFragment {
+import androidx.fragment.app.Fragment
+import com.example.weatherapp.R
+
+class DetailFragment : Fragment(R.layout.fragment_detail){
 }
