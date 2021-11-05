@@ -6,7 +6,9 @@ import android.view.View
 import androidx.appcompat.app.ActionBar
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }

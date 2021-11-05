@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,14 +16,16 @@ import com.example.weatherapp.databinding.FragmentListBinding
 import com.example.weatherapp.ui.adapter.WeatherAdapter
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Status
+import javax.inject.Inject
+
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
     val fragDetail: DetailFragment by lazy { DetailFragment() }
     val fragLookup: LookupFragment by lazy { LookupFragment() }
+    private val weatherViewModel: WeatherViewModel by requireActivity(). viewModels()
+    @Inject
     lateinit var adapter: WeatherAdapter
-    private val weatherViewModel: WeatherViewModel by viewModels()
-
 
 
     override fun onCreateView(
@@ -31,6 +34,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
         initUI()
+        initAPI()
         return binding.root
     }
 
@@ -54,7 +58,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchWeatherData().observe(this) {
+        weatherViewModel.fetchWeatherData().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     Log.i("MainActivity", "Success: ${it.message}")
@@ -71,7 +75,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                     //Handle Error
                     Log.d("MainActivity", "Error: ${it.message}")
                     binding.progressBar.visibility = View.INVISIBLE
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         }

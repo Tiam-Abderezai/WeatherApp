@@ -7,8 +7,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Weather
+import javax.inject.Inject
 
-class WeatherAdapter  constructor(
+class WeatherAdapter @Inject constructor(
 ) : RecyclerView.Adapter<WeatherAdapter.DataViewHolder>() {
 
     private var items: ArrayList<Weather> = ArrayList()
@@ -41,6 +42,4 @@ class WeatherAdapter  constructor(
                 addAll(items)
             }
         }
-
-
 }
