@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.14990942028985507" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.14990942028985507" />
         <entry key="app/src/main/res/layout/fragment_lookup.xml" value="0.14402173913043478" />
-        <entry key="app/src/main/res/layout/item_weather.xml" value="0.14402173913043478" />
+        <entry key="app/src/main/res/layout/item_weather.xml" value="0.1" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.14990942028985507" />
       </map>
     </option>

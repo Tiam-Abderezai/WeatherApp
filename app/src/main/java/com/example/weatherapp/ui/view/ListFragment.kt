@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Weather
 import com.example.weatherapp.databinding.FragmentListBinding
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
     val fragDetail: DetailFragment by lazy { DetailFragment() }
-    val fragLookup: LookupFragment by lazy { LookupFragment() }
+    val fragLookup: MainFragment by lazy { MainFragment() }
     private val weatherViewModel: WeatherViewModel by activityViewModels()
     @Inject
     lateinit var adapter: WeatherAdapter
@@ -59,7 +59,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchWeatherData().observe(viewLifecycleOwner) {
+        weatherViewModel.fetchWeatherData("philadelphia", BuildConfig.API_KEY).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     Log.i("MainActivity", "Success: ${it.message}")

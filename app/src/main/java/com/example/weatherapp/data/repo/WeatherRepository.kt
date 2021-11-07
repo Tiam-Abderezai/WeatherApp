@@ -5,7 +5,7 @@ import com.example.weatherapp.data.remote.ApiService
 import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(private val apiService: ApiService) {
-    suspend fun getWeatherData(): List<Weather> {
-        return apiService.getWeatherData()
+    suspend fun getWeather(city: String, api_key: String): List<Weather> {
+        return apiService.getWeather(city, api_key)
     }
 }

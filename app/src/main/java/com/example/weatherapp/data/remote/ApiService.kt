@@ -1,9 +1,15 @@
 package com.example.weatherapp.data.remote
 
+import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.data.model.Weather
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
-    @GET("cats?count=100&urls=true&httpsUrls=true")
-    suspend fun getWeatherData(): List<Weather>
+    @GET("weather")
+    suspend fun getWeather(
+        @Query("q") city: String,
+        @Query("appid") api_key: String
+    ): List<Weather>
 }

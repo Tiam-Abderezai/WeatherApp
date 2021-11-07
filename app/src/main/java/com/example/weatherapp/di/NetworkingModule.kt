@@ -18,7 +18,7 @@ object NetworkingModule {
 
     @Provides
     fun providesBaseUrl(): String {
-        return "https://shibe.online/api/"
+        return "https://api.openweathermap.org/data/2.5/"
     }
 
     @Provides

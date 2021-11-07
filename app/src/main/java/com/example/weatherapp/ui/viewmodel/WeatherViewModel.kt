@@ -12,10 +12,10 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val weatherRepo: WeatherRepository
 ) : ViewModel() {
-    fun fetchWeatherData() = liveData(Dispatchers.IO) {
+    fun fetchWeatherData(city: String, api_key: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            emit(Resource.success(data = weatherRepo.getWeatherData()))
+            emit(Resource.success(data = weatherRepo.getWeather(city, api_key)))
         } catch (exception: Exception) {
             emit(Resource.error(exception.message ?: "Error Occurred!", data = null))
         }

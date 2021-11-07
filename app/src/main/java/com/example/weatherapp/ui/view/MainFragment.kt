@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
-import com.example.weatherapp.databinding.FragmentLookupBinding
+import com.example.weatherapp.databinding.FragmentMainBinding
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
 
-class LookupFragment : Fragment() {
-    lateinit var binding : FragmentLookupBinding
+class MainFragment : Fragment() {
+    lateinit var binding : FragmentMainBinding
     private lateinit var etCity: TextInputEditText
     private lateinit var btnLookup: MaterialButton
     val fragList: ListFragment by lazy { ListFragment() }
@@ -22,7 +22,7 @@ class LookupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLookupBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         initUI()
         return binding.root
     }

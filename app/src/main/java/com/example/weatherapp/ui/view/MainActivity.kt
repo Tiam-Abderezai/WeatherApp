@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     val actionBar: ActionBar? by lazy { supportActionBar }
-    val fragLookup: LookupFragment by lazy { LookupFragment() }
+    val fragLookup: MainFragment by lazy { MainFragment() }
     val fragDetail: DetailFragment by lazy { DetailFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

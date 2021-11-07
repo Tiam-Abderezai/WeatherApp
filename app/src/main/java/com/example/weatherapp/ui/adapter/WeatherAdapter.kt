@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Weather
+import kotlinx.android.synthetic.main.item_weather.view.*
 import javax.inject.Inject
 
 class WeatherAdapter @Inject constructor(
@@ -16,7 +17,8 @@ class WeatherAdapter @Inject constructor(
 
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Weather) {
-//            itemView.weaweatvwwetvtv_weather
+            itemView.tv_weather.text = item.main
+//            itemView.tv_temp.text = item.
         }
     }
 
