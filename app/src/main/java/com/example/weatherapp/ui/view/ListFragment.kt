@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -23,7 +24,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
     val fragDetail: DetailFragment by lazy { DetailFragment() }
     val fragLookup: LookupFragment by lazy { LookupFragment() }
-    private val weatherViewModel: WeatherViewModel by requireActivity(). viewModels()
+    private val weatherViewModel: WeatherViewModel by activityViewModels()
     @Inject
     lateinit var adapter: WeatherAdapter
 
