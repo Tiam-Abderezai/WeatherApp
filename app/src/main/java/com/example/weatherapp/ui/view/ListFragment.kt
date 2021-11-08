@@ -70,12 +70,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                         Log.i("ListFragment", "Success: ${it}")
 //                    binding.progressBar.visibility = View.INVISIBLE
                         it.data?.let { usersData -> renderList(usersData) }
-                        binding.recyclerView.visibility = View.INVISIBLE
+//                        binding.recyclerView.visibility = View.INVISIBLE
                     }
                     Status.LOADING -> {
                         Log.i("ListFragment", "Loading: ${it.message}")
 //                    binding.progressBar.visibility = View.INVISIBLE
-                        binding.recyclerView.visibility = View.INVISIBLE
+//                        binding.recyclerView.visibility = View.INVISIBLE
                     }
                     Status.ERROR -> {
                         //Handle Error
