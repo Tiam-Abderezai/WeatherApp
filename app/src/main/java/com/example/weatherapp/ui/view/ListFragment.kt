@@ -12,21 +12,20 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.R
-import com.example.weatherapp.data.model.Weather
+import com.example.weatherapp.data.model.WeatherResponse
 import com.example.weatherapp.databinding.FragmentListBinding
 import com.example.weatherapp.ui.adapter.WeatherAdapter
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Status
+import kotlinx.android.synthetic.main.fragment_list.*
+import retrofit2.Response
 import javax.inject.Inject
 
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
-    val fragDetail: DetailFragment by lazy { DetailFragment() }
-    val fragLookup: MainFragment by lazy { MainFragment() }
     private val weatherViewModel: WeatherViewModel by activityViewModels()
-    @Inject
-    lateinit var adapter: WeatherAdapter
+    private val weatherAdapter by lazy { WeatherAdapter() }
 
 
     override fun onCreateView(
@@ -40,51 +39,57 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     fun initUI() {
-        binding.vBackArrow.setOnClickListener {
-            binding.recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
-            binding.recyclerView.adapter = adapter
-            binding.recyclerView.addItemDecoration(
-                DividerItemDecoration(
-                    binding.recyclerView.context,
-                    (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+        binding.apply {
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = weatherAdapter
+                addItemDecoration(
+                    DividerItemDecoration(
+                        context,
+                        (layoutManager as LinearLayoutManager).orientation
+                    )
                 )
-            )
 
-            activity?.supportFragmentManager?.beginTransaction()?.apply {
-                replace(R.id.frame_layout, fragLookup,"toLookupFrag")
-                disallowAddToBackStack()
-                commit()
             }
         }
+
+//        binding.vBackArrow.setOnClickListener {
+//            activity?.supportFragmentManager?.beginTransaction()?.apply {
+//                replace(R.id.frame_layout, fragMain,"toMainFrag")
+//                disallowAddToBackStack()
+//                commit()
+//            }
+//        }
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchWeatherData("philadelphia", BuildConfig.API_KEY).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    Log.i("MainActivity", "Success: ${it.message}")
-                    binding.progressBar.visibility = View.INVISIBLE
-                    it.data?.let { usersData -> renderList(usersData) }
-                    binding.recyclerView.visibility = View.INVISIBLE
-                }
-                Status.LOADING -> {
-                    Log.i("MainActivity", "Loading: ${it.message}")
-                    binding.progressBar.visibility = View.INVISIBLE
-                    binding.recyclerView.visibility = View.INVISIBLE
-                }
-                Status.ERROR -> {
-                    //Handle Error
-                    Log.d("MainActivity", "Error: ${it.message}")
-                    binding.progressBar.visibility = View.INVISIBLE
-                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+        weatherViewModel.fetchWeatherData("philadelphia", BuildConfig.API_KEY)
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        Log.i("ListFragment", "Success: ${it}")
+//                    binding.progressBar.visibility = View.INVISIBLE
+                        it.data?.let { usersData -> renderList(usersData) }
+                        binding.recyclerView.visibility = View.INVISIBLE
+                    }
+                    Status.LOADING -> {
+                        Log.i("ListFragment", "Loading: ${it.message}")
+//                    binding.progressBar.visibility = View.INVISIBLE
+                        binding.recyclerView.visibility = View.INVISIBLE
+                    }
+                    Status.ERROR -> {
+                        //Handle Error
+                        Log.d("ListFragment", "Error: ${it.message}")
+//                    binding.progressBar.visibility = View.INVISIBLE
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-        }
     }
-    private fun renderList(items: List<Weather>) {
-        adapter.apply {
+
+    private fun renderList(items: Response<WeatherResponse>) {
+        weatherAdapter.apply {
             addData(items)
-            notifyDataSetChanged()
         }
     }
 }

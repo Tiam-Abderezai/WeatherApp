@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkingModule {
+object RetrofitModule {
 
     @Provides
     fun providesBaseUrl(): String {

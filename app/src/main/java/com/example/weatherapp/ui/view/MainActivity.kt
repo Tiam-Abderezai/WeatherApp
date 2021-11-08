@@ -13,8 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     val actionBar: ActionBar? by lazy { supportActionBar }
-    val fragLookup: MainFragment by lazy { MainFragment() }
-    val fragDetail: DetailFragment by lazy { DetailFragment() }
+    val fragMain: MainFragment by lazy { MainFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.frame_layout, fragLookup)
+            replace(R.id.frame_layout, fragMain)
             addToBackStack(null)
             commit()
 //                actionBar?.show()
