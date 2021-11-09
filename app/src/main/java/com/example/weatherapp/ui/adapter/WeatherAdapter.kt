@@ -26,6 +26,7 @@ class WeatherAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         holder.bind(items[position])
+
         holder.itemView.setOnClickListener {
 //            Toast.makeText(holder.itemView.context, items[position], Toast.LENGTH_SHORT).show()
         }
