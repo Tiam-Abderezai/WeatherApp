@@ -12,4 +12,7 @@ class WeatherRepository @Inject constructor(private val apiService: ApiService) 
     suspend fun getWeather(city: String, api_key: String): Response<WeatherResponse> {
         return apiService.getWeather(city, api_key)
     }
+    suspend fun getForecast(city: String, api_key: String): Response<WeatherResponse> {
+        return apiService.getForecast(city, api_key)
+    }
 }

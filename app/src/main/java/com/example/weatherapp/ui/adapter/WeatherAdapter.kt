@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.weatherapp.ui.view.ListFragmentDirections
 import kotlinx.android.synthetic.main.item_weather.view.*
 import retrofit2.Response
 import javax.inject.Inject
+import kotlin.math.log
 
 class WeatherAdapter @Inject constructor(
 ) : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
@@ -28,20 +30,29 @@ class WeatherAdapter @Inject constructor(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        holder.bind(items[position])
-        val weatherResponse = items[position].body()
+        val item = items[position]
+        Log.d("WeatherAdapter", "onBindViewHolder: $item")
+        holder.bind(item)
         val action =
-            weatherResponse?.let { ListFragmentDirections.actionListFragmentToDetailFragment(it) }
+            item.body()?.let {
+                ListFragmentDirections.actionListFragmentToDetailFragment(
+                    it
+                )
+            }
         holder.itemView.setOnClickListener {
-            action?.let { it1 -> it.findNavController().navigate(it1) }
+            action?.let { weatherResponse -> it.findNavController().navigate(weatherResponse) }
 //            Toast.makeText(holder.itemView.context, items[position], Toast.LENGTH_SHORT).show()
         }
     }
 
     class WeatherViewHolder(itemView: ItemWeatherBinding) : RecyclerView.ViewHolder(itemView.root) {
         fun bind(item: Response<WeatherResponse>) {
-            itemView.tv_weather.text = item.body()?.weather?.get(0)?.description.toString()
-            itemView.tv_temp.text = item.body()?.main?.temp.toString()
+            val weather = item.body()?.weather?.get(0)?.description.toString()
+            val temp = item.body()?.main?.temp.toString()
+            Log.d("WeatherAdapter", "WeatherViewHolder: $weather $temp")
+
+            itemView.tv_weather.text = weather
+            itemView.tv_temp.text = "Temp $temp"
         }
     }
 

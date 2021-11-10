@@ -17,4 +17,10 @@ interface ApiService {
         @Query("q") city: String,
         @Query("appid") api_key: String
     ): Response<WeatherResponse>
+
+    @GET("forecast")
+    suspend fun getForecast(
+        @Query("q") city: String,
+        @Query("appid") api_key: String
+    ): Response<WeatherResponse>
 }

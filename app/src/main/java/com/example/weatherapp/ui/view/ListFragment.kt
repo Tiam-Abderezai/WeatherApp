@@ -44,6 +44,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     fun initUI() {
         binding.apply {
+            toolbarTitle.text = args.city
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = weatherAdapter
@@ -60,7 +61,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchWeatherData(args.city, BuildConfig.API_KEY)
+        weatherViewModel.fetchForecast(args.city, BuildConfig.API_KEY)
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
