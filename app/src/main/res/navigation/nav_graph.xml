@@ -33,6 +33,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="weatherResponse"
-            app:argType="com.example.weatherapp.data.model.ForecastResponse" />
+            app:argType="com.example.weatherapp.data.model.WeatherResponse" />
     </fragment>
 </navigation>

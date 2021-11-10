@@ -18,7 +18,7 @@ import com.example.weatherapp.data.model.ForecastResponse
 import com.example.weatherapp.data.model.WeatherResponse
 import com.example.weatherapp.databinding.FragmentListBinding
 import com.example.weatherapp.ui.adapter.ClickListener
-import com.example.weatherapp.ui.adapter.ForecastAdapter
+import com.example.weatherapp.ui.adapter.WeatherAdapter
 import com.example.weatherapp.ui.viewmodel.ForecastViewModel
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Status
@@ -26,13 +26,13 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import retrofit2.Response
 import javax.inject.Inject
 
+private const val TAG = "ListFragment"
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
     private val forecastViewModel: ForecastViewModel by activityViewModels()
-    private val forecastAdapter by lazy { ForecastAdapter() }
+    private val weatherAdapter by lazy { WeatherAdapter() }
     private val args by navArgs<ListFragmentArgs>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             toolbarTitle.text = args.city
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = forecastAdapter
+                adapter = weatherAdapter
                 addItemDecoration(
                     DividerItemDecoration(
                         context,
@@ -88,8 +88,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun renderList(items: Response<ForecastResponse>) {
-        forecastAdapter.apply {
-            addData(items)
+        weatherAdapter.apply {
+
+            Log.d(TAG, "renderList: ${items.body()?.list?.size}")
+            items.body()?.list?.let { addData(it) }
         }
     }
 
