@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.R
+import com.example.weatherapp.data.model.ForecastResponse
 import com.example.weatherapp.data.model.WeatherResponse
 import com.example.weatherapp.databinding.FragmentListBinding
 import com.example.weatherapp.ui.adapter.ClickListener
-import com.example.weatherapp.ui.adapter.WeatherAdapter
+import com.example.weatherapp.ui.adapter.ForecastAdapter
+import com.example.weatherapp.ui.viewmodel.ForecastViewModel
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Status
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -27,8 +29,8 @@ import javax.inject.Inject
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
-    private val weatherViewModel: WeatherViewModel by activityViewModels()
-    private val weatherAdapter by lazy { WeatherAdapter() }
+    private val forecastViewModel: ForecastViewModel by activityViewModels()
+    private val forecastAdapter by lazy { ForecastAdapter() }
     private val args by navArgs<ListFragmentArgs>()
 
 
@@ -47,7 +49,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             toolbarTitle.text = args.city
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = weatherAdapter
+                adapter = forecastAdapter
                 addItemDecoration(
                     DividerItemDecoration(
                         context,
@@ -61,7 +63,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchForecast(args.city, BuildConfig.API_KEY)
+        forecastViewModel.fetchForecast(args.city, BuildConfig.API_KEY)
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -85,8 +87,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
     }
 
-    private fun renderList(items: Response<WeatherResponse>) {
-        weatherAdapter.apply {
+    private fun renderList(items: Response<ForecastResponse>) {
+        forecastAdapter.apply {
             addData(items)
         }
     }

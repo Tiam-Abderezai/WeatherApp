@@ -2,6 +2,7 @@ package com.example.weatherapp.data.remote
 
 import android.database.Observable
 import com.example.weatherapp.BuildConfig
+import com.example.weatherapp.data.model.ForecastResponse
 import com.example.weatherapp.data.model.Weather
 import com.example.weatherapp.data.model.WeatherResponse
 import com.google.gson.JsonObject
@@ -22,5 +23,5 @@ interface ApiService {
     suspend fun getForecast(
         @Query("q") city: String,
         @Query("appid") api_key: String
-    ): Response<WeatherResponse>
+    ): Response<ForecastResponse>
 }
