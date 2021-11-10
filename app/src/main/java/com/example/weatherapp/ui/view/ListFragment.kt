@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.BuildConfig
@@ -24,11 +25,12 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class ListFragment : Fragment(R.layout.fragment_list), ClickListener {
-    private lateinit var cityName : String
+class ListFragment : Fragment(R.layout.fragment_list) {
     lateinit var binding: FragmentListBinding
     private val weatherViewModel: WeatherViewModel by activityViewModels()
     private val weatherAdapter by lazy { WeatherAdapter() }
+    private val args by navArgs<ListFragmentArgs>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +60,7 @@ class ListFragment : Fragment(R.layout.fragment_list), ClickListener {
     }
 
     private fun initAPI() {
-        weatherViewModel.fetchWeatherData(cityName, BuildConfig.API_KEY)
+        weatherViewModel.fetchWeatherData(args.city, BuildConfig.API_KEY)
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -88,8 +90,8 @@ class ListFragment : Fragment(R.layout.fragment_list), ClickListener {
         }
     }
 
-    override fun itemClicked(weather: WeatherResponse) {
-        val action = ListFragmentDirections.actionListFragmentToDetailFragment(weather, cityName)
-        findNavController().navigate(action)
-    }
+//    override fun itemClicked(weather: WeatherResponse) {
+//        val action = ListFragmentDirections.actionListFragmentToDetailFragment( cityName)
+//        findNavController().navigate(action)
+//    }
 }

@@ -3,10 +3,13 @@ package com.example.weatherapp.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.WeatherResponse
 import com.example.weatherapp.databinding.ItemWeatherBinding
+import com.example.weatherapp.ui.view.ListFragmentDirections
 import kotlinx.android.synthetic.main.item_weather.view.*
 import retrofit2.Response
 import javax.inject.Inject
@@ -26,8 +29,11 @@ class WeatherAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         holder.bind(items[position])
-
+        val weatherResponse = items[position].body()
+        val action =
+            weatherResponse?.let { ListFragmentDirections.actionListFragmentToDetailFragment(it) }
         holder.itemView.setOnClickListener {
+            action?.let { it1 -> it.findNavController().navigate(it1) }
 //            Toast.makeText(holder.itemView.context, items[position], Toast.LENGTH_SHORT).show()
         }
     }

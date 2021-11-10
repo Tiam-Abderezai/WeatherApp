@@ -23,7 +23,7 @@
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
         <argument
-            android:name="query"
+            android:name="city"
             app:argType="string" />
     </fragment>
     <fragment
@@ -34,8 +34,5 @@
         <argument
             android:name="weatherResponse"
             app:argType="com.example.weatherapp.data.model.WeatherResponse" />
-        <argument
-            android:name="cityName"
-            app:argType="string" />
     </fragment>
 </navigation>

@@ -7,7 +7,7 @@
 
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_city_name"
+        android:id="@+id/et_city"
         android:hint="City Name"
         tools:text="City Name"
         android:textColor="@color/black"
@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_city_name"
+        app:layout_constraintTop_toBottomOf="@id/et_city"
         app:layout_constraintBottom_toTopOf="@id/btn_lookup"
         />
 

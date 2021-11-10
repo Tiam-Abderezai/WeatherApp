@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentMainBinding
 import com.google.android.material.button.MaterialButton
@@ -28,9 +29,9 @@ class MainFragment : Fragment() {
     fun initUI() {
         binding.apply {
             btnLookup.setOnClickListener {
-                if (etCityName.text.toString().isNotEmpty()) {
+                if (etCity.text.toString().isNotEmpty()) {
                     val action =
-                        MainFragmentDirections.actionMainFragmentToListFragment(etCityName.text.toString())
+                        MainFragmentDirections.actionMainFragmentToListFragment(etCity.text.toString())
                     findNavController().navigate(action)
                 } else {
                     Toast.makeText(context, "City cannot be empty", Toast.LENGTH_SHORT).show()

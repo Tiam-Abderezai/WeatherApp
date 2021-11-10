@@ -5,20 +5,30 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <include
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbar_frag_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/toolbar"
-        />
-
-    <View
-        android:id="@+id/v_back_arrow"
-        android:layout_width="64dp"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintBottom_toBottomOf="@+id/tbar_frag_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/design_default_color_primary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/btn_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:drawableStartCompat="@drawable/ic_arrow_back" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="Fragment title"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

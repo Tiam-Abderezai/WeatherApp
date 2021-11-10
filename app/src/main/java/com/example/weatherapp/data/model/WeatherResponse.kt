@@ -5,7 +5,7 @@ import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class WeatherResponse(
     @SerializedName("base")
     val base: String?,
@@ -33,19 +33,21 @@ data class WeatherResponse(
     val weather: List<Weather>,
     @SerializedName("wind")
     val wind: Wind?
-)
+) : Parcelable
 
+@Parcelize
 data class Clouds(
     @SerializedName("all")
     val all: Int?
-)
+) : Parcelable
 
+@Parcelize
 data class Coord(
     @SerializedName("lat")
     val lat: Double?,
     @SerializedName("lon")
     val lon: Double?
-)
+) : Parcelable
 
 @Parcelize
 data class Main(
@@ -67,6 +69,7 @@ data class Main(
     val temp_min: Double?
 ): Parcelable
 
+@Parcelize
 data class Sys(
     @SerializedName("country")
     val country: String?,
@@ -74,7 +77,7 @@ data class Sys(
     val sunrise: Int?,
     @SerializedName("sunset")
     val sunset: Int?
-)
+): Parcelable
 
 @Parcelize
 data class Weather(

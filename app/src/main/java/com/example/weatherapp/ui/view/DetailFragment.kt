@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentDetailBinding
+import com.example.weatherapp.ui.viewmodel.WeatherViewModel
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment(){
     private lateinit var binding : FragmentDetailBinding
@@ -26,15 +29,14 @@ class DetailFragment : Fragment(){
 
     fun initUI() {
         binding.apply {
-//            btnLookup.setOnClickListener {
-//                if (etCityName.text.toString().isNotEmpty()) {
-//                    val action =
-//                        MainFragmentDirections.actionMainFragmentToListFragment(etCityName.text.toString())
-//                    findNavController().navigate(action)
-//                } else {
-//                    Toast.makeText(context, "City cannot be empty", Toast.LENGTH_SHORT).show()
-//                }
-//            }
+            toolbarTitle.text = args.weatherResponse.name.toString()
+            tvMainTemp.text = args.weatherResponse.main?.temp.toString()
+            tvFeelsLike.text = args.weatherResponse.main?.feels_like.toString()
+            tvWeatherMain.text = args.weatherResponse.weather.first().main
+            tvWeatherDesc.text = args.weatherResponse.weather.first().description
+            btnButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
     }
