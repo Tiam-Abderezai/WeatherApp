@@ -26,9 +26,10 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import retrofit2.Response
 import javax.inject.Inject
 
-private const val TAG = "ListFragment"
 
 class ListFragment : Fragment(R.layout.fragment_list) {
+    private val TAG = "ListFragment"
+
     lateinit var binding: FragmentListBinding
     private val forecastViewModel: ForecastViewModel by activityViewModels()
     private val weatherAdapter by lazy { WeatherAdapter() }
