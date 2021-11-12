@@ -34,5 +34,8 @@
         <argument
             android:name="weatherResponse"
             app:argType="com.example.weatherapp.data.model.WeatherResponse" />
+        <argument
+            android:name="city"
+            app:argType="string" />
     </fragment>
 </navigation>

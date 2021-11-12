@@ -91,7 +91,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         weatherAdapter.apply {
 
             Log.d(TAG, "renderList: ${items.body()?.list?.size}")
-            items.body()?.list?.let { addData(it) }
+            items.body()?.list?.let { addData(it, args.city) }
         }
     }
 
